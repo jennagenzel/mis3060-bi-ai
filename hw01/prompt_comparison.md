@@ -42,7 +42,7 @@ I could understand the overall answer first and thereafter get into the details.
 ## Conclusion:
 Overall, these three prompts took vastly different approaches to answering the same question. Prompt 1 was the most generic, as it somewhat answered the question but with little elaboration or context. Prompt 2 marked an
 improvement, but still lacked a full response and was focused more so on what stakeholders would want to see rather than a thorough explanation of content. Prompt 3 produced the most useful output for a BI analyst, as it did the best job of
-providing key metrics in a clear and actionable way that an analyst can use and apply to their work in any context. 
+providing key metrics in a clear and actionable way that an analyst can use when running credit analyses and completing day-to-day tasks. 
 
 
 
