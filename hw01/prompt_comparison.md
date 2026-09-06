@@ -1,6 +1,6 @@
 QUESTION: What are the most important metrics for measuring credit risk in a consumer loan portfolio?
 
-Version 1: What are the most important metrics for measuring credit risk in a consumer loan portfolio?
+##Version 1: What are the most important metrics for measuring credit risk in a consumer loan portfolio?
 
 Claude response: Consumer loan portfolio credit risk is typically measured across a few different dimensions: how likely borrowers are to default, how much is lost when they do, and how the portfolio's risk is
 trending over time. Delinquency and default rates are the starting point. Lenders track delinquency buckets (30/60/90+ days past due) as leading indicators,
@@ -12,7 +12,7 @@ Evaluation: Claude's response does a good job of providing an overview of of cre
 late payments to major losses. However, it leaves out other key factors that came after the first 150 words. No context was provided in the prompt, and I found the response to be too generic.
 
 
-Version 2: You are a senior credit risk analyst preparing for a quarterly report to the board and other key stakeholders. What are the most important metrics for measuring credit risk in a consumer loan portfolio?
+##Version 2: You are a senior credit risk analyst preparing for a quarterly report to the board and other key stakeholders. What are the most important metrics for measuring credit risk in a consumer loan portfolio?
 
 Claude response: For a board-level credit risk report on a consumer loan portfolio, the metrics that matter fall into a few natural groups, and a good report usually shows trends over multiple quarters rather than single points in time, since direction and rate 
 of change often matter more to the board than the absolute number.Portfolio performance and delinquency. The core health indicators are delinquency rates by bucket (30, 60, 90+ days past due), the net charge-off rate, and the non-performing loan ratio. Roll rate
@@ -24,7 +24,7 @@ highlights roll rates as leading indicators and brings in key board-level concer
 Other key ideas that would be important to include are critical strategic topics that boards expects to see ( like credit line utilization,  performance by borrower cohort, and risk-adjusted profitability metrics). 
 
 
-Version 3: What are the most important metrics for measuring credit risk in a consumer loan portfolio? State the full answer in 1-2 sentences up front, then go into detail with bullets thereafter.
+##Version 3: What are the most important metrics for measuring credit risk in a consumer loan portfolio? State the full answer in 1-2 sentences up front, then go into detail with bullets thereafter.
 Claude response:The most important credit risk metrics for a consumer loan portfolio fall into a few buckets: delinquency and default rates (which show current portfolio health), loss and recovery metrics (which show realized outcomes),
 and forward-looking risk indicators (which show what's coming).Together these tell you how the portfolio is performing today, how much you're actually losing, and how much risk is building up for the future.
 
@@ -38,6 +38,18 @@ Evaluation: Claude's response does an excellent job following the structure that
 I could understand the overall answer first and thereafter get into the details. Again, key specifics and elaboration are missing, and are likely indicated after the first 150 words. 
 
 
-Conclusion: Overall, these three prompt yielded vastly different approaches to answering the question. Prompt 1 was the most generic, as it somewhat answered the question but with little elaboration or context. Prompt 2 provided an
+##Conclusion: Overall, these three prompt yielded vastly different approaches to answering the question. Prompt 1 was the most generic, as it somewhat answered the question but with little elaboration or context. Prompt 2 provided an
 improvement, but still lacked a full response and was focused more so on what to include in the report rather than a thorough explanation of content. Prompt 3 produced the most useful output for a BI analyst, as it did the best job of
 providing key ideas in a clear and actionable way that an analyst can use and apply to their work in any context. 
+
+
+
+##FACT CHECK:
+In the long version of Claude's response to section 2, question 1, it noted that "Mortgage lenders in particular use front-end DTI (housing costs/income) and back-end DTI (all debt/income) against thresholds (commonly around 36-43%, with some programs allowing higher with compensating factors)."
+
+Source: CFPB (consumerfinance/gov), page 2:https://files.consumerfinance.gov/f/documents/cfpb_your-money-your-goals_debt_income_calc_tool_2018-11_ADA.pdf
+
+When it comes to mortgages for homeowners, CFPB says that "Consider maintaining a debt-toincome ratio for all debts of 36
+percent or less. Some lenders will go up to 43 percent or higher. Your home mortgage is included in this ratio."
+
+The source and Claude's response seem to agree; there is a strong possibility that Claude referenced this document when crafting the answer.
