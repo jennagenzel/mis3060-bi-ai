@@ -1,5 +1,6 @@
 # AI Usage Log
 HW 1: Claude Desktop & Prompt Engineering 
+
 Jenna Genzel  
 09/06/2026  
 
