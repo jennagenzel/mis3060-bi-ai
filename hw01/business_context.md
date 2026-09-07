@@ -22,7 +22,7 @@ Claude response: Current means payments are up to date; Delinquent means a misse
 Follow up question: What percentage of Delinquent loans historically return to Current status on their own versus transitioning into Default?
 
 ## QUESTION 4
-4. What percentage of the portfolio is concentrated in top states like California, Texas, or New York, and what state-level default threshold indicates elevated regional risk?
+4. What percentage of the typical portfolio is concentrated in top states like California, Texas, or New York, and what indicates elevated regional risk?
 
 Claude response: Lenders measure geographic concentration by tracking each state's share of total outstanding balances against risk-appetite limits, often paired with a concentration index (like an HHI) and state-level default/loss-severity rates to see whether exposure is unevenly spread. They manage it through formal state-exposure caps in credit policy, underwriting overlays that tighten in overexposed or weakening states, and diversification targets in origination. A regional downturn typically shows up as a cluster of signals moving together in one state: delinquency and default rates rising faster than the portfolio-wide trend, roll rates accelerating, and loss-given-default widening due to weaker collateral recovery. These credit signals are usually cross-checked against local macro data — rising unemployment, falling home prices, sector-specific shocks — since the combination of both is what confirms a genuine downturn rather than noise.
 
