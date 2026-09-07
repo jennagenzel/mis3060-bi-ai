@@ -25,7 +25,7 @@ Evaluation: This approach does a great job of framing the question from an exper
 highlights roll rates as leading indicators, and brings in key board-level concerns like reserve adequacy and allowance coverage. However, the response  lacks further detail about a BI Analyst role itself. This type of prompt is too specific; it is helpful for an analyst as they prepare presentations for executives and the board, but lacks details that would be beneficial to know while completing other day-to-day tasks.
 
 
-## Version 3: What are the most important metrics for measuring credit risk in a consumer loan portfolio? State the full answer in 1-2 sentences up front, then go into detail with bullets thereafter.
+## Version 3: State the full answer to the following question in 1-2 sentences up front, then go into detail with bullets thereafter. What are the most important metrics for measuring credit risk in a consumer loan portfolio? 
 Claude response: The most important credit risk metrics for a consumer loan portfolio fall into a few buckets: delinquency and default rates (which show current portfolio health), loss and recovery metrics (which show realized outcomes),
 and forward-looking risk indicators (which show what's coming).Together these tell you how the portfolio is performing today, how much you're actually losing, and how much risk is building up for the future.
 
