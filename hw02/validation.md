@@ -1,49 +1,24 @@
 ### 2A — Known-Answer Benchmarks
-| Check | Expected | Your Script Produced | Match? | Notes |
-|---|---|---|---|---|
-| Dataset shape | (298772, 9) | Rows x Columns: 298772 x 9| Yes | N/A |
-| Null count — `security_id` | 101,597 | Missing Values Per Column: 'security_id' 101,597|Yes | N/A |
-| Null count — `amount` | 0 |Missing Values Per Column: 'amount'  0 | Yes | N/A |
-| Unique `txn_type` values | 6 |  UNIQUE ENTITY COUNTS: Unique clients:2700 Unique advisors:25 Unique securities 500 | No |The script did not display the unique txn_type values |CLAUDE PROMPT: "I just looked at the output from the script. "Unique `txn_type` values" is 6. I do not see that reflected in the script."
-OUTPUT:"Fixed and re-verified — hw02_eda.py on your computer now includes txn_type in the unique-count section (item 7), alongside clients, advisors, and securities:
- UNIQUE ENTITY COUNTS
-Unique clients:    2700
-Unique advisors:   25
-Unique securities: 500
-Unique txn_types:  6
-This is written to both the console output and hw02_profile.txt. Go ahead and re-run the script in your .venv — you should see the same result."
-| Count of `Buy` transactions | 83,556 | 83,556 | Yes | N/A |
-| `txn_date` data type | object |'txn_date' datetime64[us] |No | The script incorrectly classified the data type for 'txn_date' |CLAUDE PROMPT: "Under 'column names and data types', the values are wrong.For instance, txn_date should be object, not datetime64[us]."
-OUTPUT: "That makes sense — the script currently converts txn_date to a real datetime type at load time (for convenience in the date-range calculation), which changes its dtype before item 3 reports it. Since item 3 should reflect the data as it actually comes from the CSV, I'll load it without forcing that conversion, and only parse dates separately for the min/max calculation in item 8. Let me fix that.txn_date now correctly shows as object under item 3, matching the raw CSV data (the date parsing for item 8's earliest/latest calculation is now done separately, without changing what item 3 reports). Let me quickly confirm item 8 still works correctly.Both fixed and verified. hw02_eda.py on your computer now reports txn_date as object in item 3 (matching the raw CSV), while item 8 (earliest/latest date) still correctly computes 2020-01-01 to 2024-12-30 by parsing dates on the fly without changing the reported dtype. Go ahead and re-run it — everything else stayed the same."
-| Earliest `txn_date` | 2020-01-01 |Earliest txn_date: 2020-01-01 00:00:00 | Yes | N/A |
-| Latest `txn_date` | 2024-12-30 |Latest txn_date:   2024-12-30 00:00:00 | Yes | N/A |
-| Duplicate `txn_id` count | 0 |Duplicate txn_id count: 0 | Yes |N/A |
-| Mean `amount` | $54,075.17 | Mean amount: 54075.17 | Yes | N/A |
-| Median `amount` | $41,220.48 |Median amount:41220.49 | Yes | Results differ by $0.01, which I assume is a rounding issue |
-| Skewness of `amount` | 1.15 |Skewness amount: 1.1463 | Yes | The script did not round the result to 2 decimal places |
-| Correlation `shares`–`amount` | 0.65 |0.65 | Yes | N/A |
-| Correlation `price`–`amount` | 0.64 | 0.64 | Yes | N/A |
-| Correlation `shares`–`price` | 0.00 | 0.00 | Yes | N/A |
-| Negative `shares` count (Buy only) | 836 | 836 | Yes | N/A |
-
-| Profile file created | Yes |c:\MIS3060\mis3060-bi-ai\hw02\hw02_eda.py:270: MatplotlibDeprecationWarning: vert: bool was deprecated in Matplotlib 3.11 and will be removed in 3.13. Use orientation: {'vertical', 'horizontal'} instead.
-  ax.boxplot(data_by_type, vert=False, tick_labels=type_order,
-c:\MIS3060\mis3060-bi-ai\hw02\hw02_eda.py:297: UserWarning: Creating legend with loc="best" can be slow with large amounts of data.
-  fig.tight_layout()
-c:\MIS3060\mis3060-bi-ai\hw02\hw02_eda.py:298: UserWarning: Creating legend with loc="best" can be slow with large amounts of data.
-  fig.savefig(os.path.join(CHARTS_DIR, "scatter_shares_amount.png"), dpi=150)
-Charts saved to: c:\MIS3060\mis3060-bi-ai\hw02\charts | No | Script does not identify a list number (only goes up to 14) and does not display a yes or no value to indicate whether a profile file was created (on my end I can see that it was) |CLAUDE PROMPT:"It looks like the list items in the script stop at item 14. I do not see any item indicating the status of  "Profile file created" or the "Chart files created (3)" (yes or no). Please include all 17 items on the list, and make sure each are answered accurately and in its entirety."
-OUTPUT: "Good catch — the script does perform all 17 steps, but items 1, 15, 16, and 17 don't get the same clearly labeled header/confirmation treatment as items 2–14. Let me restructure the whole output so every one of the 17 items has its own visible, consistently formatted section with an explicit status line.All 17 items now print with clear, consistently formatted headers and explicit status confirmations, updated directly on your computer at hw02_eda.py." 
-
-
-| Chart files created (3) | Yes |c:\MIS3060\mis3060-bi-ai\hw02\hw02_eda.py:270: MatplotlibDeprecationWarning: vert: bool was deprecated in Matplotlib 3.11 and will be removed in 3.13. Use orientation: {'vertical', 'horizontal'} instead.
-  ax.boxplot(data_by_type, vert=False, tick_labels=type_order,
-c:\MIS3060\mis3060-bi-ai\hw02\hw02_eda.py:297: UserWarning: Creating legend with loc="best" can be slow with large amounts of data.
-  fig.tight_layout()
-c:\MIS3060\mis3060-bi-ai\hw02\hw02_eda.py:298: UserWarning: Creating legend with loc="best" can be slow with large amounts of data.
-  fig.savefig(os.path.join(CHARTS_DIR, "scatter_shares_amount.png"), dpi=150)
-Charts saved to: c:\MIS3060\mis3060-bi-ai\hw02\charts | No | Script does not identify a list number (only goes up to 14) and does not display a yes or no value to indicate whether the three charts were created and saved (on my end I can see that they were) | CLAUDE PROMPT: "It looks like the list items in the script stop at item 14.  For instance, I do not see any item indicating the status of  "Profile file created" or the "Chart files created (3)" (yes or no). Please include all 17 items on the list, and make sure each are answered accurately and in its entirety."
-OUTPUT:"Good catch — the script does perform all 17 steps, but items 1, 15, 16, and 17 don't get the same clearly labeled header/confirmation treatment as items 2–14. Let me restructure the whole output so every one of the 17 items has its own visible, consistently formatted section with an explicit status line.All 17 items now print with clear, consistently formatted headers and explicit status confirmations, updated directly on your computer at hw02_eda.py."
+| Check | Expected | Your Script Produced | Match? | Notes | Claude Prompt & Output |
+|---|---|---|---|---|---|
+| Dataset shape | (298772, 9) | Rows x Columns: 298772 x 9 | Yes | N/A | N/A |
+| Null count — `security_id` | 101,597 | Missing Values Per Column: 'security_id' 101,597 | Yes | N/A | N/A |
+| Null count — `amount` | 0 | Missing Values Per Column: 'amount'  0 | Yes | N/A | N/A |
+| Unique `txn_type` values | 6 | UNIQUE ENTITY COUNTS: Unique clients:2700 Unique advisors:25 Unique securities 500 | No | The script did not display the unique txn_type values | CLAUDE PROMPT: "I just looked at the output from the script. "Unique `txn_type` values" is 6. I do not see that reflected in the script."<br>OUTPUT:"Fixed and re-verified — hw02_eda.py on your computer now includes txn_type in the unique-count section (item 7), alongside clients, advisors, and securities:<br> UNIQUE ENTITY COUNTS<br>Unique clients:    2700<br>Unique advisors:   25<br>Unique securities: 500<br>Unique txn_types:  6<br>This is written to both the console output and hw02_profile.txt. Go ahead and re-run the script in your .venv — you should see the same result." |
+| Count of `Buy` transactions | 83,556 | 83,556 | Yes | N/A | N/A |
+| `txn_date` data type | object | 'txn_date' datetime64[us] | No | The script incorrectly classified the data type for 'txn_date' | CLAUDE PROMPT: "Under 'column names and data types', the values are wrong.For instance, txn_date should be object, not datetime64[us]."<br>OUTPUT: "That makes sense — the script currently converts txn_date to a real datetime type at load time (for convenience in the date-range calculation), which changes its dtype before item 3 reports it. Since item 3 should reflect the data as it actually comes from the CSV, I'll load it without forcing that conversion, and only parse dates separately for the min/max calculation in item 8. Let me fix that.txn_date now correctly shows as object under item 3, matching the raw CSV data (the date parsing for item 8's earliest/latest calculation is now done separately, without changing what item 3 reports). Let me quickly confirm item 8 still works correctly.Both fixed and verified. hw02_eda.py on your computer now reports txn_date as object in item 3 (matching the raw CSV), while item 8 (earliest/latest date) still correctly computes 2020-01-01 to 2024-12-30 by parsing dates on the fly without changing the reported dtype. Go ahead and re-run it — everything else stayed the same." |
+| Earliest `txn_date` | 2020-01-01 | Earliest txn_date: 2020-01-01 00:00:00 | Yes | N/A | N/A |
+| Latest `txn_date` | 2024-12-30 | Latest txn_date:   2024-12-30 00:00:00 | Yes | N/A | N/A |
+| Duplicate `txn_id` count | 0 | Duplicate txn_id count: 0 | Yes | N/A | N/A |
+| Mean `amount` | $54,075.17 | Mean amount: 54075.17 | Yes | N/A | N/A |
+| Median `amount` | $41,220.48 | Median amount:41220.49 | Yes | Results differ by $0.01, which I assume is a rounding issue | N/A |
+| Skewness of `amount` | 1.15 | Skewness amount: 1.1463 | Yes | The script did not round the result to 2 decimal places | N/A |
+| Correlation `shares`–`amount` | 0.65 | 0.65 | Yes | N/A | N/A |
+| Correlation `price`–`amount` | 0.64 | 0.64 | Yes | N/A | N/A |
+| Correlation `shares`–`price` | 0.00 | 0.00 | Yes | N/A | N/A |
+| Negative `shares` count (Buy only) | 836 | 836 | Yes | N/A | N/A |
+| Profile file created | Yes | c:\MIS3060\mis3060-bi-ai\hw02\hw02_eda.py:270: MatplotlibDeprecationWarning: vert: bool was deprecated in Matplotlib 3.11 and will be removed in 3.13. Use orientation: {'vertical', 'horizontal'} instead.<br>  ax.boxplot(data_by_type, vert=False, tick_labels=type_order,<br>c:\MIS3060\mis3060-bi-ai\hw02\hw02_eda.py:297: UserWarning: Creating legend with loc="best" can be slow with large amounts of data.<br>  fig.tight_layout()<br>c:\MIS3060\mis3060-bi-ai\hw02\hw02_eda.py:298: UserWarning: Creating legend with loc="best" can be slow with large amounts of data.<br>  fig.savefig(os.path.join(CHARTS_DIR, "scatter_shares_amount.png"), dpi=150)<br>Charts saved to: c:\MIS3060\mis3060-bi-ai\hw02\charts | No | Script does not identify a list number (only goes up to 14) and does not display a yes or no value to indicate whether a profile file was created (on my end I can see that it was) | CLAUDE PROMPT:"It looks like the list items in the script stop at item 14. I do not see any item indicating the status of  "Profile file created" or the "Chart files created (3)" (yes or no). Please include all 17 items on the list, and make sure each are answered accurately and in its entirety."<br>OUTPUT: "Good catch — the script does perform all 17 steps, but items 1, 15, 16, and 17 don't get the same clearly labeled header/confirmation treatment as items 2–14. Let me restructure the whole output so every one of the 17 items has its own visible, consistently formatted section with an explicit status line.All 17 items now print with clear, consistently formatted headers and explicit status confirmations, updated directly on your computer at hw02_eda.py." |
+| Chart files created (3) | Yes | c:\MIS3060\mis3060-bi-ai\hw02\hw02_eda.py:270: MatplotlibDeprecationWarning: vert: bool was deprecated in Matplotlib 3.11 and will be removed in 3.13. Use orientation: {'vertical', 'horizontal'} instead.<br>  ax.boxplot(data_by_type, vert=False, tick_labels=type_order,<br>c:\MIS3060\mis3060-bi-ai\hw02\hw02_eda.py:297: UserWarning: Creating legend with loc="best" can be slow with large amounts of data.<br>  fig.tight_layout()<br>c:\MIS3060\mis3060-bi-ai\hw02\hw02_eda.py:298: UserWarning: Creating legend with loc="best" can be slow with large amounts of data.<br>  fig.savefig(os.path.join(CHARTS_DIR, "scatter_shares_amount.png"), dpi=150)<br>Charts saved to: c:\MIS3060\mis3060-bi-ai\hw02\charts | No | Script does not identify a list number (only goes up to 14) and does not display a yes or no value to indicate whether the three charts were created and saved (on my end I can see that they were) | CLAUDE PROMPT: "It looks like the list items in the script stop at item 14.  For instance, I do not see any item indicating the status of  "Profile file created" or the "Chart files created (3)" (yes or no). Please include all 17 items on the list, and make sure each are answered accurately and in its entirety."<br>OUTPUT:"Good catch — the script does perform all 17 steps, but items 1, 15, 16, and 17 don't get the same clearly labeled header/confirmation treatment as items 2–14. Let me restructure the whole output so every one of the 17 items has its own visible, consistently formatted section with an explicit status line.All 17 items now print with clear, consistently formatted headers and explicit status confirmations, updated directly on your computer at hw02_eda.py." |
 
 ### 2B — Explain the Code and Output
 1. Did Claude's predicted outputs (from Prompt 1) match what you actually saw in the terminal? List any discrepancies.
