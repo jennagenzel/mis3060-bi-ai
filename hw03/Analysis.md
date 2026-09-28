@@ -1,0 +1,4 @@
+## Analysis
+
+### do the executive changes you found appear to precede or follow earnings announcements? Is there any pattern across the five companies, or does it vary?
+Based on the data, executive changes appear to precede earnings announcements. 22 out of 30 (73%) events were made before the earnings announcement, 2 in the same week, and 6 after. All of JPMorgan's and Walmart's events came before earnings and most of Apple and NVIDIA's did as well; the only company that does not follow this pattern is Microsoft, with 1 announcement before and 2 announcements after earnings. Although there appears to be a trend of events occurring before earnings announcements, this data is only from one year; additional data would need to be looked at from other years to validate it as an actual pattern rather than a short term occurrence.
