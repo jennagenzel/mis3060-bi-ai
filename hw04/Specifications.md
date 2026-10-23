@@ -1,6 +1,6 @@
 # Specifications
 
-## Part A — Audit (15 points)
+## Part A 
 
 Here is a summary of the 8 data tables in my hw04 folder:
 | File | Rows | Cols | Role |
