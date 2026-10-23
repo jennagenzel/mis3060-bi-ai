@@ -1,0 +1,41 @@
+table,issue,action,rows_affected,note
+fact_transactions,raw file is named 'fact_transactions (1).csv',leave as is,0,raw file untouched; clean output saved as fact_transactions.csv (decision #29)
+dim_client,same client recorded twice; last_name differs by one final letter,quarantine,25,"copies 2501-2525 (23 missing a letter, 2 with an extra letter); the original is the only row any fact table uses"
+dim_client,state written as full name,standardize,77,mapped to USPS codes; every code already existed in the column
+dim_client,blank risk_profile,fill,75,filled from fact_portfolio_snapshot.benchmark_id; benchmark 3 used only by Balanced; flagged risk_profile_imputed=1
+dim_security,expense_ratio_bps stored as float text,convert,219,'17.0' -> '17'; numeric value unchanged; blanks (individual stocks) left as is
+fact_portfolio_snapshot,return_ytd written as percent text,convert,300,'9.28%' -> 0.0928; confirmed by return = benchmark + alpha on every converted row
+fact_portfolio_snapshot,extreme return_ytd driven by cash flows,flag,1190,return_ytd = aum / prior-Dec aum - 1 on 100% of rows with a base; true time-weighted return cannot be rebuilt
+fact_portfolio_snapshot,"aum at $1,000 floor",flag,420,"never a client's first month and later balances build on it -> floor, not missing data"
+fact_portfolio_snapshot,snapshot month with no fee row,flag,7350,fee cannot be rebuilt because bps varies; flagged only
+fact_fees,fee formula and aum_basis vs snapshot aum,verify,0,both hold on 100% of rows - no change needed
+fact_fees,"fee charged on $1,000 floor",flag,386,every one matches a snapshot flagged aum_at_floor; total 282.85
+fact_transactions,client_id not in dim_client,quarantine,200,"200 client_ids 2702-3192, one row each; none appear in other fact tables"
+fact_transactions,security_id stored as float text,convert,197044,'45.0' -> '45'; text join to dim_security now matches 100% (was 0%)
+fact_transactions,negative shares on Buy rows,convert,835,abs(shares); confirmed by amount = |shares| x price on every row; flagged shares_sign_corrected=1
+fact_transactions,dividend amount equals full position value,flag,53826,true payout cannot be derived (no yield data); amount left unchanged
+fact_transactions,activity after the account's last snapshot,flag,2410,"131 clients, all is_active=False in dim_client"
+fact_transactions,transaction dated on a weekend,flag,84946,"correct date unknown, so dates are not moved"
+fact_transactions,Advisory Fee transactions disagree with fact_fees,flag,35304,client-year totals agree within 1% for only 110 of 11320; fact_fees is the source of truth
+dim_advisor,certifications = 'None',leave as is,0,real value meaning no certification; kept as text (decision #26)
+dim_date,is_trading_day ignores market holidays,leave as is,0,no holiday calendar in the data (decision #27)
+dim_benchmark,benchmark 6 never used,leave as is,0,reference row kept (decision #28)
+fact_transactions,blank security_id/shares/price on cash and fee rows,leave as is,0,legitimate structure (decision #17)
+fact_portfolio_snapshot,return_ytd in scientific notation,leave as is,0,valid number format (decision #18)
+fact_portfolio_snapshot,return_ytd = 0.0,leave as is,0,correct: AUM 1000 -> 1000 (decision #19)
+dim_client,zip_code leading zeros,leave as is,0,kept as text (decision #20)
+dim_client,initial_aum outliers,leave as is,0,normal for UHNW tier (decision #21)
+dim_client,fact dated in the month before client_since day,leave as is,0,monthly stamps on the 1st (decision #22)
+dim_security,blank expense_ratio_bps / sector,leave as is,0,"stocks have no expense ratio, funds no sector (decision #23)"
+dim_security,repeated security names,leave as is,0,different tickers; ticker is the identifier (decision #24)
+dim_security,asset_class differs from benchmark asset_class,leave as is,0,consistent mapping (decision #25)
+dim_advisor,row reconciliation,verify,0,raw 25 = clean 25 + quarantined 0
+dim_benchmark,row reconciliation,verify,0,raw 8 = clean 8 + quarantined 0
+dim_client,row reconciliation,verify,0,raw 2525 = clean 2500 + quarantined 25
+dim_date,row reconciliation,verify,0,raw 1827 = clean 1827 + quarantined 0
+dim_security,row reconciliation,verify,0,raw 500 = clean 500 + quarantined 0
+fact_fees,row reconciliation,verify,0,raw 122197 = clean 122197 + quarantined 0
+fact_portfolio_snapshot,row reconciliation,verify,0,raw 129547 = clean 129547 + quarantined 0
+fact_transactions,row reconciliation,verify,0,raw 298772 = clean 298572 + quarantined 200
+all,foreign keys after cleaning,verify,0,every FK and fact date joins as text to its dimension
+all,raw files unchanged,verify,0,SHA-256 of all 8 raw files identical before and after
